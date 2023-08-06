@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+var url="http://localhost:8080/ehub/api/ppi/workflow/add-custreg-to-workflow";
+  $("button").click(function(){
+  	console.log(" calling url : "+url);
+  	callApi(url);
+        console.log("success ");
+    	});
+
+});
+
+//"url": "https://localhost:5443/ehub/view/loading.html?nocache=1660935712916",
+
+
+function callApi(apiurl) {
+     var mobileNo = "9711842097";
+     var cardRefId = "9711842097";
+    
+    var sendInfo = {
+        mobileNumber: mobileNo,
+        cardRefId: cardRefId
+    };
+    
+    $.ajax({
+        url: "https://localhost:5443/ehub/view/loading.html?nocache=1660935712916",
+        method:'GET'
+     });
+  
+  $.ajax({
+        url: "https://localhost:5443/ehub/api/system/user/who?noCache=1660938565642",
+        method:'GET'
+     });
+     
+    $.ajax({
+        url: "https://localhost:5443/ehub/api/system/user/weblogin",
+        data: JSON.stringify({"nick":"admin","password":"EP/fEPGMEnwgRnvWF+28Cw=="}),
+        method:'POST',
+	dataType: 'json',
+	contentType: 'application/json',
+	processData: false,
+	  crossDomain: true,
+	    success: function() { alert("Success"); },
+	    error: function() { console.log('Failed!'); }
+    });
+    
+     
+        
+    $.ajax({
+        url: apiurl,
+        data: JSON.stringify(sendInfo),
+        method:'POST',
+	dataType: 'json',
+	contentType: 'application/json',
+	processData: false,
+	  crossDomain: true,
+	    success: function() { alert("Success"); },
+	    error: function() { console.log('Failed!'); }
+    });
+}
+</script>
+</head>
+<body>
+
+<button>Send an HTTP POST request to a page and get the result back</button>
+
+</body>
+</html>
+
